@@ -1,3 +1,5 @@
+![image](https://github.com/user-attachments/assets/7973d060-e528-499e-915e-1f3e27ecbbfb)
+
 This project is a revamp of the simple console password generator I did a while back.
 In this one, it uses tkinter to create GUI to enable the user to type in the website ,username/email and password they are using to sign up.
 There is an option to have the program generate a password that gets a random amount of letters (10-12), a random amount of number (2-4) and a random amount of symbols (2-4)
