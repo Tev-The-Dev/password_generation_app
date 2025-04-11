@@ -106,7 +106,7 @@ def find_password():
         if get_website() in data:
                 messagebox.showinfo(title=get_website(), message = f"Email: {get_email()}\nPassword: {data[get_website()]["password"]}")
         else:
-            messagebox.showerror(title=get_website(), message="No details for the website exists.")
+            messagebox.showerror(title=get_website(), message=f"No details for the {get_website()} exists.")
 
 # ---------------------------- UI SETUP ------------------------------- #
 
