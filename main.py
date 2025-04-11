@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 import random
 import pyperclip
+import json
 
 # ---------------------------- CREATING PATHS TO MAKE A .EXE APP ------------------------------- #
 import os
@@ -67,14 +68,30 @@ def get_password():
 
 def set_details():
     # Get the user's Documents folder
-    documents_folder = os.path.join(os.path.expanduser("~"), "Documents")
-    data_file_path = os.path.join(documents_folder, "_my_user_data.txt")
+    # documents_folder = os.path.join(os.path.expanduser("~"), "Documents")
+    # data_file_path = os.path.join(documents_folder, "_my_user_data.json")
+    new_data = {
+        get_website(): {
+            "email": get_email(),
+             "password": get_password()
+        }
+    }
+
 
     if len(get_website()) == 0 or len(get_email()) == 0 or len(get_password()) == 0:
         messagebox.showerror(title="Error", message="Please fill all fields")
     else:
-        with open(data_file_path, "r") as data_file:
-            data_file.write(f"Website: {get_website()}\nEmail/Username: {get_email()}\nPassword: {get_password()}\n\n")
+        try:
+            with open("data.json", "r") as data_file:
+                data = json.load(data_file)
+        except FileNotFoundError:
+           with open("data.json", "w") as data_file:
+               json.dump(new_data, data_file, indent=4)  # writes to a json file
+        else:
+            data.update(new_data)
+            with open("data.json", "w") as data_file:
+                json.dump(data, data_file, indent = 4) #writes to a json file
+        finally:
             website_entry.delete(0, END)
             password_entry.delete(0, END)
 
@@ -93,9 +110,12 @@ canvas.grid(row=0, column=1)
 website_label = Label(text="Website")
 website_label.grid(row=1, column=0)
 
-website_entry = Entry(width=40)
-website_entry.grid(row=1, column=1, columnspan=2)
+website_entry = Entry(width=25)
+website_entry.grid(row=1, column=1)
 website_entry.focus()
+
+search_button = Button(text="Search", command=get_website, width=15)
+search_button.grid(row=1, column=2)
 
 email_label = Label(text="Email/Username")
 email_label.grid(row=2, column=0)
