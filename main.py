@@ -77,7 +77,6 @@ def set_details():
         }
     }
 
-
     if len(get_website()) == 0 or len(get_email()) == 0 or len(get_password()) == 0:
         messagebox.showerror(title="Error", message="Please fill all fields")
     else:
@@ -95,6 +94,20 @@ def set_details():
             website_entry.delete(0, END)
             password_entry.delete(0, END)
 
+def find_password():
+    try:
+        with open("data.json", "r") as data_file:
+            data = json.load(data_file)
+    except FileNotFoundError:
+        messagebox.showerror("Error", "No stored data file found.")
+    except json.decoder.JSONDecodeError:
+        messagebox.showerror("Error", "Corrupt or Empty JSON file.")
+    else:
+        if get_website() in data:
+                messagebox.showinfo(title=get_website(), message = f"Email: {get_email()}\nPassword: {data[get_website()]["password"]}")
+        else:
+            messagebox.showerror(title=get_website(), message="No details for the website exists.")
+
 # ---------------------------- UI SETUP ------------------------------- #
 
 
@@ -110,11 +123,11 @@ canvas.grid(row=0, column=1)
 website_label = Label(text="Website")
 website_label.grid(row=1, column=0)
 
-website_entry = Entry(width=25)
+website_entry = Entry(width=21)
 website_entry.grid(row=1, column=1)
 website_entry.focus()
 
-search_button = Button(text="Search", command=get_website, width=15)
+search_button = Button(text="Search", command=find_password, width=15)
 search_button.grid(row=1, column=2)
 
 email_label = Label(text="Email/Username")

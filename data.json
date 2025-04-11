@@ -1,10 +1,14 @@
 {
     "Amazon": {
         "email": "test@gmail.com",
-        "password": "#9ZRzJ%cGyR6ZCBO"
+        "password": "*JlE4LyAqm!HZ4pK"
     },
-    "Ebay": {
+    "Facebook": {
         "email": "test@gmail.com",
-        "password": "jbunMc0mh(4Ik%7(W*v"
+        "password": "BJL((%yL2KpTvn6H3&"
+    },
+    "Netflix": {
+        "email": "test@gmail.com",
+        "password": "#Q5CbhnvTmef3P!(#"
     }
 }
