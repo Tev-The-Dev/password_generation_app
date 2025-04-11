@@ -3,6 +3,7 @@ from tkinter import messagebox
 import random
 import pyperclip
 
+# ---------------------------- CREATING PATHS TO MAKE A .EXE APP ------------------------------- #
 import os
 import sys
 
@@ -14,6 +15,7 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 logo_path = resource_path("logo.png")
+
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 #Password Generator Project
 def generate_password():
@@ -71,12 +73,8 @@ def set_details():
     if len(get_website()) == 0 or len(get_email()) == 0 or len(get_password()) == 0:
         messagebox.showerror(title="Error", message="Please fill all fields")
     else:
-        is_ok = messagebox.askokcancel(title=get_website(), message=f"These are the details entered: \nEmail:{get_email()}\nPassword:{get_password()}\nIs it ok to save?")
-
-        if is_ok:
-            f = open(data_file_path, 'a')
-            f.write(f"Website: {get_website()}\nEmail/Username: {get_email()}\nPassword: {get_password()}\n\n")
-            f.close()
+        with open(data_file_path, "r") as data_file:
+            data_file.write(f"Website: {get_website()}\nEmail/Username: {get_email()}\nPassword: {get_password()}\n\n")
             website_entry.delete(0, END)
             password_entry.delete(0, END)
 
